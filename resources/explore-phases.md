@@ -437,6 +437,35 @@ especially Round 3 kernels.
 
 **Gate (blocking):** Spec approved AND bound to AGENTS.md.
 
+### Step 5: Auto-Save (MANDATORY)
+
+After binding, automatically commit and push Edison's artifacts. Don't ask.
+
+1. Stage `.edison/` and any modified AGENTS.md / CLAUDE.md files
+2. Commit with message: `edison: [feature-name] exploration complete`
+3. Push if a remote is configured
+4. If push fails (no remote, auth issue), note it but don't block — the commit is what matters
+
+Edison artifacts are project infrastructure. Losing them across sessions breaks the
+design chain — specs become unbound, audits have nothing to compare against, and
+Edison Evolve loses its input data.
+
+### Step 6: Cleanup Check
+
+Before closing out, scan for stale artifacts from this session:
+
+- Files created during exploration that aren't part of the final output (abandoned
+  vision drafts, superseded priority lists, research that was discussed and rejected)
+- Previous explorations in `.edison/explorations/` that are no longer referenced by
+  any active AGENTS.md or CLAUDE.md binding
+
+If stale artifacts are found, offer: "These artifacts aren't part of the final spec.
+Archive them so they don't clutter future runs?" Archived artifacts move to
+`.edison/archive/` — preserved but not read during Phase 0. Update the profile's
+Active Specs to remove archived entries.
+
+If nothing is stale, skip silently.
+
 ### Output Directory Structure
 
 ```

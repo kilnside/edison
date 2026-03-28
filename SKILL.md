@@ -154,7 +154,7 @@ Focused for scores 2-3. Per-priority graduation reduces actual cost.
 | 6. Round 3 | The Provocateur: per-tension, not per-priority. Kernel extraction. | Checkpoint table |
 | 7. Synthesis | CONVERGENCE.md + DEFINITIVE-SPEC.md + artifact. Run Metadata appended. Observations deposited. | None |
 | 7.5. Review Gate | Adversary + New Hire stress-test the spec document. SHIP IT / NEEDS WORK / STOP. | STOP blocks handoff |
-| 8. Handoff | Present synthesis first. Drill down on request. Bind to AGENTS.md. | User approves + binding complete |
+| 8. Handoff | Present synthesis first. Drill down on request. Bind to AGENTS.md. Auto-commit and push. | User approves + binding complete |
 
 **Focused (2-round) path:** Skips Round 3. Final Synthesis draws from R1 and R2 only.
 Unresolved tensions are flagged in CONVERGENCE.md as "open questions for implementation."
@@ -184,6 +184,28 @@ All output to `.edison/explorations/[date]-[feature]/`:
     ├── DEFINITIVE-SPEC.md (includes Validation Plan)
     └── [definitive artifact]
 ```
+
+### Auto-Save
+
+After Phase 8 handoff (or after Audit completes), automatically commit `.edison/` and
+any AGENTS.md/CLAUDE.md binding changes. Push if a remote is configured. Don't ask.
+Edison artifacts are project infrastructure — losing them breaks the design chain.
+
+Commit message format: `edison: [feature-name] [mode] complete`
+
+---
+
+## Cleanup
+
+Runs automatically at the end of every Explore and Audit (Phase 8 Step 6). Also
+available manually via `/edison clean`.
+
+- Scan `.edison/explorations/` and `.edison/audits/` for artifacts not referenced by
+  any active AGENTS.md or CLAUDE.md binding
+- Present the list: "These explorations aren't referenced by any active spec. Archive them?"
+- Archived artifacts move to `.edison/archive/` — preserved but not read during Phase 0
+- Update `.edison/profile.md` Active Specs to remove archived entries
+- Skip silently if nothing is stale
 
 ---
 
