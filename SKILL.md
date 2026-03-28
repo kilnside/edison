@@ -180,7 +180,7 @@ Generated: [date] | Updated: [date]
 
 ## Identity
 - **Name:** [from manifest]
-- **Domain:** [2-3 words: "ceramics social app", "B2B SaaS dashboard"]
+- **Domain:** [2-3 words: "recipe social app", "B2B SaaS dashboard"]
 - **Stack:** [framework, language, DB, deployment]
 - **Maturity:** [greenfield | early | established | legacy]
 

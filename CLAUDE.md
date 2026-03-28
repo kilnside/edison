@@ -1,24 +1,27 @@
 # Edison Skill Development
 
-## What This Project Is
+## What This Is
 
-This is the development workspace for the Edison skill -- a methodology for getting design decisions right before writing code. The live skill file lives at `~/.claude/skills/edison/SKILL.md`.
+Edison is a Claude Code skill for design exploration. The live skill file is `SKILL.md`.
 
-## Files
+## Repository Structure
 
-- `SKILL.md` -- working copy of the Edison skill (edit this, copy to ~/.claude/skills/edison/ when ready)
-- `edison-on-edison.md` -- analysis of Edison's failure modes and the 3-mode proposal
-- `case-study-gap-analysis.md` -- real example of what happens when Edison's handoff fails (Kilnside v3)
+- `SKILL.md` — The skill itself. This is what users install.
+- `README.md` — Public-facing documentation.
+- `.claude-plugin/` — Plugin marketplace configuration.
+- `development/` — Exploration artifacts from Edison's self-design process (Edison was designed by running Edison on itself).
 
-## Development Workflow
+## Contributing
 
-1. Edit `SKILL.md` in this directory
-2. Test by running `/edison` in any project
-3. When satisfied, copy to `~/.claude/skills/edison/SKILL.md`
+1. Edit `SKILL.md`
+2. Copy to `~/.claude/skills/edison/SKILL.md` for local testing
+3. Test by running `/edison` in any project
+4. Submit a PR with a description of what changed and why
 
-## Key Design Principles
+## Design Principles
 
-- Edison has 3 modes: Check (gate), Explore (deep dive), Audit (spec vs code)
-- The handoff (Phase 8) is the most important phase -- specs must become build contracts
-- Trigger sensitivity should be low -- fire on design decisions, not every new file
-- The user is always right -- every mode is advisory
+- Edison should research, not interrogate
+- Be honest about when Edison is NOT the right tool
+- Token cost is a feature, not a bug — but always be transparent about it
+- The spec must be self-executing — no bridge artifacts
+- The user is always right
