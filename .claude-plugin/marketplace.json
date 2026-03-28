@@ -1,7 +1,7 @@
 {
   "name": "edison",
-  "version": "2.0.0",
-  "description": "Design exploration skill — research-first, progressively-deepening analysis for getting design decisions right before writing code.",
+  "version": "3.0.0",
+  "description": "Design decision skill — the phase between brainstorming and building. Research-first, progressively-deepening analysis with edge case hardening, cross-project learning, and self-improvement architecture.",
   "author": "Kilnside",
   "license": "MIT",
   "homepage": "https://github.com/kilnside/edison",
@@ -9,6 +9,10 @@
     {
       "name": "edison",
       "path": "SKILL.md"
+    },
+    {
+      "name": "edison-evolve",
+      "path": "edison-evolve/SKILL.md"
     }
   ]
 }
