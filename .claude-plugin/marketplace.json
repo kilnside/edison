@@ -2,9 +2,9 @@
   "name": "edison",
   "version": "2.0.0",
   "description": "Design exploration skill — research-first, progressively-deepening analysis for getting design decisions right before writing code.",
-  "author": "Scott Compel",
+  "author": "Kilnside",
   "license": "MIT",
-  "homepage": "https://github.com/scottcompel/edison",
+  "homepage": "https://github.com/kilnside/edison",
   "skills": [
     {
       "name": "edison",

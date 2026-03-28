@@ -53,12 +53,12 @@ reducing actual cost below the estimate.
 
 **Option A: Plugin marketplace**
 ```bash
-/plugin marketplace add scottcompel/edison
+/plugin marketplace add kilnside/edison
 ```
 
 **Option B: Manual install**
 ```bash
-git clone https://github.com/scottcompel/edison.git
+git clone https://github.com/kilnside/edison.git
 cp edison/SKILL.md ~/.claude/skills/edison/SKILL.md
 ```
 
@@ -118,10 +118,30 @@ interconnected, precedent-setting, or irreversible decisions.
 
 ## Origin
 
-Edison was designed by running Edison on itself — a meta-exploration that produced
-the skill's own specification through three rounds of progressive deepening with
-18+ subagents, 60+ research sources, and 5 synthesis passes. The exploration
-artifacts are preserved in the `development/` directory.
+Edison was born from a real failure. While building [Kilnside](https://kilnside.com)
+— a ceramics community app — we ran a deep design exploration that produced a
+thorough spec for the v3 redesign. 21 subagents, 3 rounds, a beautiful
+DEFINITIVE-SPEC.md. Then we built it with parallel implementation agents.
+
+The result: **51% spec coverage. 4 structural contradictions.** The mobile
+bottom nav directly contradicted the spec's "kill tab navigation" directive.
+An onboarding wizard existed that the spec explicitly said to remove. A share
+toggle component was built but never wired in. The spec was great. Nobody
+followed it.
+
+That failure taught us two things:
+1. A spec that nobody follows is worse than no spec
+2. AI's real value isn't writing code faster — it's researching what to build
+
+So we built Edison. Then we ran Edison on itself to produce its own spec — 5
+research agents, 7 priorities across 3 progressive rounds, 4 tension-based
+wild explorations, and 3 synthesis passes. The exploration artifacts are
+preserved in `development/`.
+
+The case study that started it all is at
+[`development/case-study-gap-analysis.md`](development/case-study-gap-analysis.md) —
+63 spec items audited against the codebase, showing exactly where and why the
+handoff failed.
 
 ## License
 
