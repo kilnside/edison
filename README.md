@@ -41,12 +41,10 @@ Edison fills the phase between brainstorming and building — the part where you
 <details>
 <summary>Other install methods</summary>
 
-**Manual install**
+**From source (includes Edison Evolve + Product Forge)**
 ```bash
 git clone https://github.com/kilnside/edison.git
-cp edison/SKILL.md ~/.claude/skills/edison/SKILL.md
-mkdir -p ~/.claude/skills/edison/resources
-cp edison/resources/* ~/.claude/skills/edison/resources/
+cd edison && ./install.sh
 ```
 
 **Project-level (team sharing)**
