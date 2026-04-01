@@ -181,13 +181,14 @@ All Edison output lives in `.edison/` at the project root:
 
 Edison works alone. Edison works better with these:
 
-| Skill | Role |
-|-------|------|
-| **Brainstorming** | Simple decisions (Check score 0-1) |
-| **Implementation Planning** | Plans from Edison's spec task blocks |
-| **Edison Evolve** | Reads Edison outputs, proposes SKILL.md improvements |
+| Skill | Role | Install |
+|-------|------|---------|
+| **Edison Evolve** | Reads Edison outputs, proposes SKILL.md improvements | `cp -r edison-evolve ~/.claude/skills/` |
+| **Product Forge** | End-to-end orchestrator: Edison → validate → build → test → ship | `cp -r product-forge ~/.claude/skills/` |
+| **Brainstorming** | Simple decisions (Check score 0-1) | — |
+| **Implementation Planning** | Plans from Edison's spec task blocks | — |
 
-None are required.
+None are required. Product Forge is recommended for going from idea to working MVP in one session.
 
 ## Origin
 
