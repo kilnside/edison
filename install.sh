@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install Edison + companion skills for Claude Code
+# Installs three skills: Edison, Edison Evolve, and Product Forge
 set -e
 
 SKILLS_DIR="${HOME}/.claude/skills"

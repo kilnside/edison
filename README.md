@@ -41,7 +41,7 @@ Edison fills the phase between brainstorming and building — the part where you
 <details>
 <summary>Other install methods</summary>
 
-**From source (includes Edison Evolve + Product Forge)**
+**From source (installs Edison + Edison Evolve + Product Forge)**
 ```bash
 git clone https://github.com/kilnside/edison.git
 cd edison && ./install.sh
