@@ -67,7 +67,14 @@ If questions cluster in one category, reframe 2-3 from an underrepresented persp
 
 ### Step 2: Research Dispatch (1-5 agents in parallel)
 
-Number of agents = number of question clusters (minimum 1, maximum 5). Each agent gets:
+Number of agents = number of question clusters (minimum 1, maximum 5).
+
+**Example split for product features:** UX patterns / domain needs / technical
+implementation / visual design. This 4-way split produces non-redundant results
+for domain-specific product work. Adapt the split to match the exploration's domain
+— this template is a starting point, not a prescription.
+
+Each agent gets:
 - Their question cluster
 - Required output per question: Sources Found → Specific Findings → Project Implication
 - Minimum 2 real sources per question (or explicit "nothing found")
@@ -151,10 +158,39 @@ After all R1 agents complete:
   Synthesis can override these classifications based on cross-priority analysis
   (e.g., a self-score-4 priority that contradicts another priority may be downgraded
   to CONTESTED).
+- **Auto-graduation:** Priorities with self-score ≥4 AND no cross-priority conflicts
+  detected in synthesis auto-graduate to RESOLVED. Do not advance them to R2. This
+  saves tokens on well-understood priorities without sacrificing depth on contested
+  ones. Cross-priority conflict = the priority's recommended path contradicts or
+  creates tension with another priority's recommendation.
 - RESOLVED priorities freeze — they don't advance to Round 2
 - List of "conventional choices" worth questioning
 
 Write `R1-SYNTHESIS.md`. Present checkpoint table to user.
+
+### Round Signal Check
+
+Before proceeding to the next round, evaluate whether this round produced enough
+new signal to justify the token investment of another round. Score two dimensions:
+
+| Dimension | Question | Low Signal |
+|-----------|----------|------------|
+| **Novelty** | Did agents produce findings not already in the research brief? | >70% of findings trace directly to research with no new analysis |
+| **Disagreement** | Did agents disagree with each other or with research? | All agents converged on the same answer with no tension |
+
+- **0/2 = skip to Final Synthesis.** The round didn't produce new information —
+  another round won't either. Tell the user: "This round confirmed what research
+  already found. Recommending we synthesize now rather than spend tokens on another
+  round."
+- **1/2 = recommend skip, user can override.** Present the signal assessment and
+  let the user decide.
+- **2/2 = proceed.** Genuine signal exists for the next round to build on.
+
+Add a signal row to the checkpoint table:
+
+```
+| Round Signal | Novelty: ✓/✗ | Disagreement: ✓/✗ | → Proceed/Skip |
+```
 
 **Early exit:** If all priorities are RESOLVED, skip to Final Synthesis.
 
@@ -209,13 +245,18 @@ trigger questions per lens to prevent degradation to generic analysis.
 | **Integrator** | What happens at the seam where this meets everything else? | Structural, default fallback |
 
 Assignment heuristic: match lens to priority classification (structural → Failure
-Analyst or Integrator, tradeoff → Economist or Archaeologist, conceptual → End-User
-Materialist). When priorities outnumber lenses, default unmatched to Integrator.
-Allow reuse across waves but avoid same lens on related priorities in the same wave.
+Analyst or Integrator, tradeoff → Economist (default) or Archaeologist, conceptual →
+End-User Materialist). Tradeoffs default to Economist because tradeoffs are
+fundamentally about resource allocation and opportunity cost. When priorities outnumber
+lenses, default unmatched to Integrator. Allow reuse across waves but avoid same lens
+on related priorities in the same wave.
 
 Each agent MUST:
 - Address assumptions with verdicts: **confirmed** / **overturned** / **refined**
 - Produce a structured diff against R1 (what changed, what stayed, why)
+- **Seek synthesis between R1 options, not just elimination.** R2's power is often in
+  combining the best of competing approaches into a hybrid R1 didn't consider. Ask:
+  "Can two of R1's options work together?" before asking "Which option wins?"
 - Find gaps within the gaps — guided by their assigned lens
 - Cross-pollinate: apply insights from other priorities
 
@@ -235,6 +276,12 @@ Agent outputs go to `.edison/explorations/[date]-[feature]/r2/priority-N-name/`.
 - "Most radical departure that still serves the vision"
 
 Write `R2-SYNTHESIS.md`. Present checkpoint table.
+
+### Round Signal Check
+
+Same evaluation as post-R1 (see Phase 4). Score Novelty and Disagreement for R2's
+output relative to R1. If 0/2, skip to Final Synthesis. If 1/2, recommend skip.
+If 2/2, proceed to R3.
 
 **Early exit:** If all remaining priorities are now RESOLVED, skip to Final Synthesis.
 
@@ -378,8 +425,9 @@ Each reviewer reads the spec independently (no debate) and produces:
 Only **STOP** verdicts block handoff. **NEEDS WORK** flags are presented to the user as
 advisory. Flags feed into Phase 8 presentation.
 
-**Skip condition:** If all R1 priorities resolved (no R2/R3 needed), skip the review
-gate — the spec is simple enough that the gate adds noise, not signal.
+**No skip.** The review gate always runs, even on simple specs. Evidence shows it
+catches real contradictions (scope conflicts, undefined thresholds, missing taxonomies)
+at low cost (~10-12K tokens). The gate earns its cost.
 
 ---
 
