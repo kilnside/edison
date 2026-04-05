@@ -65,6 +65,44 @@ category: forum complaints, support tickets, analytics patterns, review sentimen
 If questions cluster in one category, reframe 2-3 from an underrepresented perspective
 (user advocate, business skeptic, newcomer). This prevents search monoculture.
 
+### Step 1.5: Fork Questions (async, non-blocking)
+
+Scan the research questions for **forks**: questions where one user answer would make
+2+ other research questions irrelevant. These are high-leverage pivots, not
+interrogation — the difference is that a fork question eliminates entire branches
+of research, while a regular question just adds information.
+
+**Trigger:** A research question qualifies as a fork when one answer would eliminate
+30%+ of the remaining research scope (typically 2+ other questions become irrelevant).
+
+**If 1-3 fork questions are found**, surface them before dispatching research:
+
+> **Quick check before I go deep** (answer anytime, or ignore — I'll explore both sides):
+> - [Fork question 1]
+> - [Fork question 2]
+>
+> *Dispatching research now...*
+
+Then dispatch immediately. Do not wait for a response.
+
+**If the user responds before R1 synthesis** (Phase 4), incorporate their answer:
+narrow the research scope at synthesis time, not dispatch time. No work is wasted —
+the broader research is still valuable context even when the user narrows the fork.
+
+**If the user doesn't respond**, proceed exactly as if this step didn't exist. The
+exploration is identical to current behavior. AFK-safe by design.
+
+**If brainstorming already ran** (check for brainstorm artifacts in `.superpowers/`
+or similar), skip fork questions that brainstorming already answered. Only surface
+what's still ambiguous.
+
+**Constraints:**
+- Maximum 3 fork questions (more = interrogation)
+- No countdown or timer (async, like an email)
+- Never block on the answer
+- Only surface when token savings are dramatic (not for 5K-token forks)
+- Do not ask questions that research could answer — those are Edison's job
+
 ### Step 2: Research Dispatch (1-5 agents in parallel)
 
 Number of agents = number of question clusters (minimum 1, maximum 5).
@@ -147,6 +185,12 @@ Each agent produces:
 Agent outputs go to `.edison/explorations/[date]-[feature]/r1/priority-N-name/`.
 
 ### R1 Synthesis
+
+**Fork question check:** Before synthesizing, check if the user responded to any
+fork questions from Step 1.5. If yes, weight R1 findings accordingly — the user's
+answer narrows which research is primary vs. background context. Note the narrowing
+in synthesis so later rounds understand the constraint came from user input, not
+from research conclusions.
 
 After all R1 agents complete:
 - Per-priority: recommended path, confidence, unchallenged assumptions
