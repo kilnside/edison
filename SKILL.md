@@ -63,6 +63,33 @@ User request or self-trigger
 | `/edison audit`, "what happened to the spec?", "does this match?" | Audit |
 | "explore all the options", "spare no expense" | Explore directly |
 | "are we missing anything?" | The Check |
+| `--autonomous`, "run autonomously", "don't wait for me", "I'll be AFK" | Explore in autonomous mode (see below) |
+
+### Autonomous Mode
+
+When invoked with `--autonomous` or equivalent language ("run autonomously",
+"don't wait for me", "I'll be AFK", "just go"), Edison runs with blanket
+gate pre-approval. Gates remain internal synthesis checkpoints — Edison still
+pauses to write VISION.md, priorities.md, and the final spec at each gate —
+but Edison does not wait for user confirmation between phases.
+
+**What changes:**
+- Vision Capture: Edison writes VISION.md and proceeds without confirmation
+- Priority Identification: Edison writes priorities.md and proceeds without confirmation
+- Handoff: Edison presents the spec, binds it, auto-commits, and reports completion
+
+**What stays the same:**
+- All rounds, synthesis, and the Review Gate run exactly as in interactive mode
+- Fork questions still appear on the Guidance Board (the user may be watching)
+- The final spec is presented; the user can still reject or request changes after
+- Steering remains available via interrupt (Ctrl+C / new message)
+
+**Announce at start:** "Running autonomously. I'll present the spec when done.
+Interrupt anytime if you want to steer." One line. No ceremony.
+
+**Evidence basis:** Autonomous runs on Guidance/cannabinoid-personalization
+and GlazeLN/annotation-v2 produced no quality loss vs interactive runs. Gates'
+value was synthesis-forcing, not user-input-requiring. (kilnside/edison#3)
 
 ### Self-Trigger
 
@@ -260,7 +287,7 @@ is not in Edison format and coverage metrics may be approximate.
 | Graduated depth | RESOLVED priorities freeze. Only unresolved advance. |
 | Preserve everything | Never delete alternatives. Round 3 kernels are especially valuable. |
 | Steering is non-blocking | User can skip, reprioritize, or stop at any time. |
-| Gates are blocking | Vision, Priority, and Handoff gates require user confirmation. |
+| Gates are blocking (by default) | Vision, Priority, and Handoff gates require user confirmation. In autonomous mode, gates remain as synthesis checkpoints but don't wait for input. |
 | The user is always right | "Just build it" = build it. "The spec is wrong" = update the spec. |
 | Creative contribution awareness | Know what's established ground vs. genuinely novel territory. Spend energy on paradigm shifts. |
 

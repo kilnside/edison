@@ -27,6 +27,11 @@ Play it back in one paragraph. Save to `.edison/explorations/[date]-[feature]/VI
 blocking gates in Explore mode. Steering is non-blocking. Gates (Vision, Priority,
 Handoff) are blocking by design.
 
+**Autonomous mode:** If the user invoked Edison with `--autonomous` (or equivalent),
+this gate becomes a synthesis checkpoint only — Edison writes VISION.md and proceeds
+without waiting for confirmation. The synthesis still happens; only the pause is
+removed. The user can still reject or steer the final spec at handoff.
+
 ---
 
 ## Phase 2: Research
@@ -207,6 +212,9 @@ Each priority gets:
 Present to user. User confirms, reorders, adds, removes.
 
 **Gate (blocking):** Priority list confirmed.
+
+**Autonomous mode:** Edison writes priorities.md and proceeds without waiting for
+confirmation. Late priority injection is still supported mid-run via steering.
 
 **Late priority injection:** Users may add priorities between rounds. These are accepted
 with a note in synthesis that late-added priorities have reduced coverage (fewer rounds
@@ -635,6 +643,13 @@ All round outputs stay in the exploration directory. Never delete alternatives �
 especially Round 3 kernels.
 
 **Gate (blocking):** Spec approved AND bound to AGENTS.md.
+
+**Autonomous mode:** Edison presents the spec, binds it, auto-commits, and reports
+completion — all in one pass. The user reviews after the fact. If they reject or
+request changes, Edison iterates from the existing spec (no re-exploration needed).
+This is the one gate where the "pause" is replaced by "present and continue" rather
+than removed entirely — the binding and commit still happen, but confirmation is
+post-hoc.
 
 ### Step 5: Auto-Save (MANDATORY)
 
