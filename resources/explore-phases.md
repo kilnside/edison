@@ -65,7 +65,7 @@ category: forum complaints, support tickets, analytics patterns, review sentimen
 If questions cluster in one category, reframe 2-3 from an underrepresented perspective
 (user advocate, business skeptic, newcomer). This prevents search monoculture.
 
-### Step 1.5: Fork Questions (async, non-blocking)
+### Step 1.5: Fork Questions → Guidance Board (async, non-blocking)
 
 Scan the research questions for **forks**: questions where one user answer would make
 2+ other research questions irrelevant. These are high-leverage pivots, not
@@ -75,18 +75,39 @@ of research, while a regular question just adds information.
 **Trigger:** A research question qualifies as a fork when one answer would eliminate
 30%+ of the remaining research scope (typically 2+ other questions become irrelevant).
 
-**If 1-3 fork questions are found**, surface them before dispatching research:
+**If 1-3 fork questions are found**, post the Guidance Board before dispatching:
 
-> **Quick check before I go deep** (answer anytime, or ignore — I'll explore both sides):
-> - [Fork question 1]
-> - [Fork question 2]
->
-> *Dispatching research now...*
+```
+Edison is working. If you're around, these would help:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+○ Mobile-first or desktop-first?         (~80K tokens)
+○ Clean break or coexist with current?   (~60K tokens)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Researching · 0/[N] priorities explored
+```
 
-Then dispatch immediately. Do not wait for a response.
+Then dispatch research immediately. Do not wait for a response.
 
-**If the user responds before R1 synthesis** (Phase 4), incorporate their answer:
-narrow the research scope at synthesis time, not dispatch time. No work is wasted —
+**The Guidance Board is a sticky note, not a task list.** Edison posts it once and
+never mentions it again. No nagging, no re-posting, no "you haven't answered yet."
+The user sees it or doesn't. It's insurance against retroactive regret — the user
+who was at their computer wishes Edison had asked, the user who was AFK never
+notices it was there.
+
+**Board lifecycle:**
+- **Appears:** At research dispatch, with fork questions and token savings per item
+- **Grows:** R1 or R2 may append new high-leverage forks (maximum 5 items total)
+- **Updates:** When Edison detects a response, mark the item answered: `● Tabs or sidebar? → "tabs"`
+- **Progress line:** Update the bottom line at phase transitions so returning users
+  get instant context: `Round 1 ████████░░ 6/8 priorities`
+- **Consumed:** At each synthesis point, check for new responses and incorporate
+- **Disappears:** Naturally scrolls away. Never re-posted. Never referenced in handoff.
+  Do not mention unanswered questions — that's guilt, not guidance.
+
+Use ○/● markers, not ☐/☑ — this is not a checklist. Do NOT use TodoWrite.
+
+**If the user responds**, incorporate their answer at the next synthesis point.
+Narrow the research scope at synthesis time, not dispatch time. No work is wasted —
 the broader research is still valuable context even when the user narrows the fork.
 
 **If the user doesn't respond**, proceed exactly as if this step didn't exist. The
@@ -97,11 +118,12 @@ or similar), skip fork questions that brainstorming already answered. Only surfa
 what's still ambiguous.
 
 **Constraints:**
-- Maximum 3 fork questions (more = interrogation)
-- No countdown or timer (async, like an email)
-- Never block on the answer
+- Maximum 5 items on the board at any time (across all phases)
+- Post the board once. Never re-post, never nag.
+- Never block on any question
 - Only surface when token savings are dramatic (not for 5K-token forks)
 - Do not ask questions that research could answer — those are Edison's job
+- Show estimated token savings per question (makes the value of answering visible)
 
 ### Step 2: Research Dispatch (1-5 agents in parallel)
 
@@ -186,11 +208,13 @@ Agent outputs go to `.edison/explorations/[date]-[feature]/r1/priority-N-name/`.
 
 ### R1 Synthesis
 
-**Fork question check:** Before synthesizing, check if the user responded to any
-fork questions from Step 1.5. If yes, weight R1 findings accordingly — the user's
-answer narrows which research is primary vs. background context. Note the narrowing
+**Guidance Board check:** Before synthesizing, check if the user responded to any
+items on the Guidance Board. If yes, weight R1 findings accordingly — the user's
+answer narrows which research is primary vs. background context. Mark answered items
+on the board (● with their answer). Update the progress line. Note the narrowing
 in synthesis so later rounds understand the constraint came from user input, not
-from research conclusions.
+from research conclusions. If R1 surfaced a new high-leverage fork, append it to
+the board (up to 5 items total).
 
 After all R1 agents complete:
 - Per-priority: recommended path, confidence, unchallenged assumptions
