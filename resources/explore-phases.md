@@ -190,10 +190,16 @@ of analysis). They enter the next round alongside advancing priorities.
 
 **Character: The Engineer.** Find the best known solution for each priority.
 
-One agent per priority, batched in waves of 3-4 for subagent limits. Each receives:
+One agent per priority, dispatched in dependency-ordered waves. Wave 1: priorities
+with no dependencies (run in parallel, batched 3-4 for subagent limits). Wave 2:
+priorities that depend on Wave 1 outputs (receive resolved outputs as context).
+Continue until all priorities are covered. Dependency ordering produces more
+coherent results — dependent agents reference settled answers instead of guessing.
+
+Each agent receives:
 - Vision document + research brief
 - Their priority + all other priorities for context
-- Resolved outputs from any dependency priorities (if explored in an earlier wave)
+- Resolved outputs from dependency priorities in earlier waves
 
 Each agent produces:
 - `analysis.md` — 500-800 words: priority understood, 2-3 approaches informed by
@@ -253,9 +259,11 @@ new signal to justify the token investment of another round. Score two dimension
 | **Disagreement** | Did agents disagree with each other or with research? | All agents converged on the same answer with no tension |
 
 - **0/2 = skip to Final Synthesis.** The round didn't produce new information —
-  another round won't either. Tell the user: "This round confirmed what research
-  already found. Recommending we synthesize now rather than spend tokens on another
-  round."
+  another round won't either. When all priorities also scored ≥4, frame this as
+  success, not fallback: "Research was thorough and your vision was clear — R1
+  nailed it. Proceeding to synthesis." When some priorities scored lower, frame
+  as: "This round confirmed what research already found. Synthesizing with what
+  we have."
 - **1/2 = recommend skip, user can override.** Present the signal assessment and
   let the user decide.
 - **2/2 = proceed.** Genuine signal exists for the next round to build on.
@@ -492,8 +500,15 @@ artifact (not the design — the document). These are spec *consumers*, not desi
 
 | Reviewer | Catches | Output |
 |----------|---------|--------|
-| **The Adversary** | Contradictions between spec sections, unstated assumptions that could be false, gaps where two requirements conflict | Top concern + 3-5 flags + verdict |
+| **The Adversary** | Contradictions between spec sections, cross-spec contradictions with parent/sibling specs, unstated assumptions that could be false, gaps where two requirements conflict | Top concern + 3-5 flags + verdict |
 | **The New Hire** | Undefined terms, assumed context, sections that only make sense if you were in the room, missing "why" behind decisions | Top concern + 3-5 flags + verdict |
+
+**Cross-spec check (Adversary):** If the spec references related specs (parent,
+sibling, or superseded), the Adversary reads those specs and checks for
+contradictions — icon changes, color system reversals, terminology conflicts,
+principle violations. Any decision that reverses or redefines a parent/sibling
+spec decision must be explicitly flagged with a Supersedes note. Unmarked
+reversals are flags.
 
 Each reviewer reads the spec independently (no debate) and produces:
 - **Top concern** — single biggest risk (1-2 sentences)
