@@ -78,12 +78,14 @@ of research, while a regular question just adds information.
 **If 1-3 fork questions are found**, post the Guidance Board before dispatching:
 
 ```
-Edison is working. If you're around, these would help:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-○ Mobile-first or desktop-first?         (~80K tokens)
-○ Clean break or coexist with current?   (~60K tokens)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Researching · 0/[N] priorities explored
+💡 Edison is exploring. If you're around, these would help:
+
+   ◇ Mobile-first or desktop-first?         (~80K tokens)
+   ◇ Clean break or coexist with current?   (~60K tokens)
+
+   ◆ Tabs or sidebar? → "tabs"
+
+💡 Researching · ░░░░░░░░░░ 0/[N] priorities
 ```
 
 Then dispatch research immediately. Do not wait for a response.
@@ -97,14 +99,16 @@ notices it was there.
 **Board lifecycle:**
 - **Appears:** At research dispatch, with fork questions and token savings per item
 - **Grows:** R1 or R2 may append new high-leverage forks (maximum 5 items total)
-- **Updates:** When Edison detects a response, mark the item answered: `● Tabs or sidebar? → "tabs"`
-- **Progress line:** Update the bottom line at phase transitions so returning users
-  get instant context: `Round 1 ████████░░ 6/8 priorities`
+- **Updates:** When Edison detects a response, mark the item answered: `◆ Tabs or sidebar? → "tabs"`
+- **Progress line:** Update the bottom line with 💡 prefix at phase transitions so
+  returning users get instant context: `💡 Round 1 · ████████░░ 6/8 priorities`
 - **Consumed:** At each synthesis point, check for new responses and incorporate
 - **Disappears:** Naturally scrolls away. Never re-posted. Never referenced in handoff.
   Do not mention unanswered questions — that's guilt, not guidance.
 
-Use ○/● markers, not ☐/☑ — this is not a checklist. Do NOT use TodoWrite.
+Use ◇/◆ diamond markers and 💡 lightbulb prefix — this is Edison's visual identity,
+distinct from GSD's checkbox style. Do NOT use TodoWrite. The diamonds and lightbulb
+make it instantly recognizable as an Edison element, not a task list.
 
 **If the user responds**, incorporate their answer at the next synthesis point.
 Narrow the research scope at synthesis time, not dispatch time. No work is wasted —
