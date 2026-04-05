@@ -91,6 +91,22 @@ Five questions. Unweighted. Threshold: 2 of 5.
 Score 0-1: Build. Flag assumptions.
 Score 2+: Recommend Explore. Present the case. User decides.
 
+### Implicit Security Flag (independent of score)
+
+Ask one additional question separately from the 5 Check questions:
+
+> **Cross-user data read?** Does this feature query rows the current user did not create
+> (social feeds, discovery, shared content, leaderboards, notifications)?
+
+If YES, Edison must include `CROSS-USER READ` fields on affected Components in the
+DEFINITIVE-SPEC and flag the need for explicit RLS / access control verification.
+This flag triggers regardless of the Check score — a simple CRUD feature with a
+cross-user read still needs policy review, even if it's a "just build it" call.
+
+Why: functional tests cannot detect silently-blocked cross-user queries. The failure
+mode is "empty results," which is indistinguishable from "no data yet." Only explicit
+policy review catches it. (kilnside/edison#13)
+
 ### Pre-Check
 
 Glob for specs in `.edison/`, CLAUDE.md "Active Design Specs", AGENTS.md.

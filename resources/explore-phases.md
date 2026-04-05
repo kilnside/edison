@@ -465,6 +465,14 @@ Append `## Run Metadata` to CONVERGENCE.md after synthesis:
 - Fallbacks triggered (null research, all-MURKY, etc.)
 - Research hit rate (questions with useful results / total questions)
 
+**Cross-user read scan (MANDATORY):** Before writing DEFINITIVE-SPEC.md, scan every
+Component's VERIFICATION field for patterns that read data the current user doesn't
+own. Trigger phrases: "query", "fetch", "list", "display", "show" combined with
+entities that belong to other users (pieces, posts, profiles, feeds, notifications,
+comments, bookmarks, shares). Any such Component MUST include the `CROSS-USER READ`
+field. If the synthesis can't determine whether a read is cross-user, flag it
+explicitly in the spec as an open question rather than omitting the field.
+
 ### Deliverable 2: DEFINITIVE-SPEC.md
 
 The complete design specification. Dual-structure:
@@ -483,10 +491,30 @@ AGENT INSTRUCTION: [specific implementation directive]
 MUST: [requirements]
 MUST NOT: [anti-requirements]
 VERIFICATION: [how to check this was done correctly]
+CROSS-USER READ: [optional — see below]
 ```
 
 The spec carries its own execution metadata. No separate contracts directory.
 No separate checklist. The VERIFICATION fields ARE the checklist.
+
+**CROSS-USER READ field (conditional):** If the component reads rows the current
+user did not create (social features, feeds, discovery, notifications, leaderboards,
+any query where `auth.uid() != row.owner`), add this field. Its presence signals
+that RLS policies, access control rules, and permission boundaries must be verified
+alongside functional correctness.
+
+```
+CROSS-USER READ: yes — confirm RLS policies / access rules permit this query for
+  non-owner users. Functional tests alone cannot detect this class of bug —
+  a silently-blocked query returns "no data yet" which is indistinguishable
+  from the feature working correctly on empty state.
+```
+
+This field exists because functional and integration tests cannot catch
+silently-empty RLS-blocked queries. The feature appears to work (no errors,
+UI gracefully handles empty state) but the data path is dead. Only explicit
+policy review catches it. Added after Community Inspiration Loop incident
+(kilnside/edison#13, 2026-04-05).
 
 **Validation Plan (REQUIRED):** DEFINITIVE-SPEC.md includes a `## Validation Plan`
 section at the end. For each low-confidence or medium-confidence decision:
