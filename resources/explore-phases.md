@@ -164,6 +164,12 @@ After all R1 agents complete:
   ones. Cross-priority conflict = the priority's recommended path contradicts or
   creates tension with another priority's recommendation.
 - RESOLVED priorities freeze — they don't advance to Round 2
+- **Creative contribution map:** For each priority, note whether the recommended path
+  aligns with established conventions (platform HIG, category leaders, common patterns)
+  or departs from them. Both are valid — but Edison should know which is which. Arriving
+  at a known pattern through independent reasoning is validation, not waste. Departures
+  are where Edison's unique creative value lives. Flag departures for deeper exploration
+  in R2.
 - List of "conventional choices" worth questioning
 
 Write `R1-SYNTHESIS.md`. Present checkpoint table to user.
@@ -273,6 +279,10 @@ Agent outputs go to `.edison/explorations/[date]-[feature]/r2/priority-N-name/`.
 - **Tensions:** Pairs of priorities that pull against each other, each phrased as a
   design conflict (e.g., "Performance wants server rendering but Interactivity wants
   client state")
+- **Creative contribution update:** Revisit the R1 creative contribution map. Did R2
+  challenge any convention-aligned recommendations into novel territory? Did any
+  departures get validated or refined? The insights that no convention produces — those
+  are Edison's signature contributions.
 - "Most radical departure that still serves the vision"
 
 Write `R2-SYNTHESIS.md`. Present checkpoint table.

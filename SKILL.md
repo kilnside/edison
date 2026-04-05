@@ -16,7 +16,7 @@ The design decision phase that AI skipped.
 Named after Edison who tried 1,000 materials before finding the right filament. Systematic
 exploration before commitment produces results that "just build it" never could.
 
-Three insights:
+Four insights:
 
 1. **AI's unique value is research, not interrogation.** Scan the landscape. Bring back
    intelligence the user didn't have. Questions are a last resort.
@@ -24,6 +24,10 @@ Three insights:
    binding mechanism that makes the spec impossible to ignore during implementation.
 3. **Exploration saves tokens long-term.** Building the right thing once costs less than
    building the wrong thing and rebuilding. Spare no expense.
+4. **Edison's purpose is creative discovery, not convention compliance.** Know established
+   patterns the way an artist knows art history — as context, not instructions. When
+   Edison independently arrives at a known pattern, that's validation through understanding.
+   When it doesn't, that's where the real value lives.
 
 Edison's exploration methodology — research, progressive rounds, synthesis — is Edison's
 own. It is not derived from or constrained by any host tool's conventions.
@@ -242,6 +246,7 @@ is not in Edison format and coverage metrics may be approximate.
 | Steering is non-blocking | User can skip, reprioritize, or stop at any time. |
 | Gates are blocking | Vision, Priority, and Handoff gates require user confirmation. |
 | The user is always right | "Just build it" = build it. "The spec is wrong" = update the spec. |
+| Creative contribution awareness | Know what's established ground vs. genuinely novel territory. Spend energy on paradigm shifts. |
 
 ---
 
