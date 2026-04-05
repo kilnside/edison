@@ -60,12 +60,15 @@ git add .claude/skills/edison/
 ## Usage
 
 ```
-/edison          # Start with the Check, escalate if needed
-/deep-dive       # Go straight to Explore
-/edison audit    # Compare spec vs. code
+/edison              # Start with the Check, escalate if needed
+/deep-dive           # Go straight to Explore
+/edison audit        # Compare spec vs. code
+/edison --autonomous # Run end-to-end without pausing at gates
 ```
 
 Or just describe a complex design decision — Edison self-triggers when it detects interconnected, precedent-setting, or irreversible decisions.
+
+**Autonomous mode** (`--autonomous`, or say *"run autonomously"* / *"I'll be AFK"* / *"don't wait for me"*) keeps gates as internal synthesis checkpoints but doesn't pause for confirmation. Edison writes the vision, priorities, and final spec, binds it, auto-commits, and reports completion. You review the result after the fact. Steering via interrupt is always available.
 
 ## How It Works
 
@@ -80,8 +83,8 @@ Or just describe a complex design decision — Edison self-triggers when it dete
   |   +-- Phase 0:   Project Scan (first run only)
   |   +-- Phase 1:   Vision Capture
   |   +-- Phase 2:   Research (1-5 agents scan the real world)
-  |   |   +-- Fork Questions (async — asks 1-3 high-leverage
-  |   |       pivots, keeps working regardless of answer)
+  |   |   +-- Guidance Board posted (◆ Edison companion with
+  |   |       1-3 fork questions + phase progress spine)
   |   +-- Phase 3:   Priority Identification (5-10 key decisions)
   |   +-- Phase 4:   Round 1 - The Engineer (constraint satisfaction)
   |   |   +-- Auto-graduation: confident priorities freeze early
@@ -124,6 +127,50 @@ Score 2+ recommends Explore.
 Synthesis picks the best answer per-priority across all rounds. Round 1 might win for stability. Round 3 might win for the signature interaction.
 
 **Fork Questions:** Before dispatching research, Edison identifies 1-3 high-leverage pivot questions — places where one answer would eliminate 30%+ of the research scope. These are surfaced async (like an email from a colleague who keeps working regardless). If you answer, Edison narrows at synthesis time. If you don't, the exploration is identical to a fully autonomous run.
+</details>
+
+<details>
+<summary><strong>The Guidance Board</strong></summary>
+
+When Edison finds high-leverage fork questions, it posts a Guidance Board — an ambient companion presence, not a task list:
+
+```
+┌ ▐░▌ Edison — Researching
+│
+│  A few forks in the road:
+│
+│  ◇ Mobile-first or desktop-first?              (high leverage)
+│  ◇ Clean break or coexist with current system?  (moderate leverage)
+│
+│  ◆◇◇◇◇◇ Researching · 0/4 agents
+└
+```
+
+**Three-layer presence:**
+- **Mark** — `◆` prefixes every Edison status line. Recognition at scroll speed.
+- **Narrator** — Phase-tied action verbs with brevity decay. `Researching` → `Shaping` → `Exploring` → `Challenging` → `Probing` → `Synthesizing` → `Complete`.
+- **Figure** — `▐░▌` appears exactly twice per run, as bookends. Hello at the first board, goodbye at the handoff line.
+
+**The board re-emits** at major phase transitions with updated header and fork question states. Between re-emissions, standalone diamond breadcrumbs (`◆◆◆◇◇◇ Exploring · 3/8`) form a scannable spine through the scrollback. An AFK user who returns after 30 minutes can reconstruct the journey from 5-8 breadcrumb lines.
+
+The board never nags, never re-asks unanswered questions, and never references silence. Insurance against retroactive regret — not obligation.
+</details>
+
+<details>
+<summary><strong>Cross-User Read Verification</strong></summary>
+
+When a Component queries rows the current user doesn't own (social feeds, discovery, shared content, notifications), Edison adds a `CROSS-USER READ` field to the spec. This flags the need for explicit RLS / access control verification alongside functional testing.
+
+Why: functional tests cannot detect silently-blocked cross-user queries. A query that returns zero rows because of policy blocking is indistinguishable from a query that returns zero rows because there's no data yet. The feature "works" in tests and breaks in production. Only explicit policy review catches it.
+
+```markdown
+## Component: Inspired-By Feed
+IMPLEMENTS: Priority 3 (Community Discovery)
+VERIFICATION: Feed renders pieces from users the viewer doesn't follow
+CROSS-USER READ: yes — confirm RLS policies permit this query for
+  non-owner users. Silently-empty RLS results look identical to
+  "no data yet" state.
+```
 </details>
 
 <details>
