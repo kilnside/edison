@@ -78,37 +78,61 @@ of research, while a regular question just adds information.
 **If 1-3 fork questions are found**, post the Guidance Board before dispatching:
 
 ```
-💡 Edison is exploring. If you're around, these would help:
-
-   ◇ Mobile-first or desktop-first?         (~80K tokens)
-   ◇ Clean break or coexist with current?   (~60K tokens)
-
-   ◆ Tabs or sidebar? → "tabs"
-
-💡 Researching · ░░░░░░░░░░ 0/[N] priorities
+┌ ▐░▌ Edison — Researching
+│
+│  A few forks in the road:
+│
+│  ◇ Mobile-first or desktop-first?              (high leverage)
+│  ◇ Clean break or coexist with current system?  (moderate leverage)
+│
+│  ◆◇◇◇◇◇ Researching · 0/4 agents
+└
 ```
 
 Then dispatch research immediately. Do not wait for a response.
 
-**The Guidance Board is a sticky note, not a task list.** Edison posts it once and
-never mentions it again. No nagging, no re-posting, no "you haven't answered yet."
-The user sees it or doesn't. It's insurance against retroactive regret — the user
-who was at their computer wishes Edison had asked, the user who was AFK never
-notices it was there.
+**The Guidance Board is a sticky note, not a task list.** Edison posts it at research
+dispatch and re-emits at major phase transitions (R1, R2, R3, Synthesis) with updated
+state — never more than once per phase. It never mentions unanswered questions, never
+nags, never re-asks. The user sees it or doesn't. Insurance against retroactive regret.
+
+**Visual identity — three layers:**
+
+1. **Mark:** ◆ (filled diamond, U+25C6) prefixes every Edison status line. ◇ = unresolved,
+   ◆ = resolved. The ◇→◆ transition encodes Edison's story.
+2. **Narrator:** Phase-tied action verbs with brevity decay (shorter as the run deepens):
+   - Research → `Researching` / Priorities → `Shaping` / R1 → `Exploring`
+   - R2 → `Challenging` / R3 → `Probing` / Synthesis → `Synthesizing` / Handoff → `Complete`
+   - Cargo register: active present tense, confident, terse. No workshop/forge/filament
+     metaphors — the Edison name is enough inheritance.
+3. **Figure:** `▐░▌` glyph (Tier 2 quadrant blocks with `◆` Tier 1 fallback). Appears
+   exactly twice per run: first board emission (hello) and handoff line (goodbye). A
+   cameo, never a companion. Two appearances prevent character fatigue (Clippy/Navi
+   failure mode).
 
 **Board lifecycle:**
-- **Appears:** At research dispatch, with fork questions and token savings per item
+- **Appears:** At research dispatch, with fork questions and leverage indicators
 - **Grows:** R1 or R2 may append new high-leverage forks (maximum 5 items total)
-- **Updates:** When Edison detects a response, mark the item answered: `◆ Tabs or sidebar? → "tabs"`
-- **Progress line:** Update the bottom line with 💡 prefix at phase transitions so
-  returning users get instant context: `💡 Round 1 · ████████░░ 6/8 priorities`
+- **Re-emits:** At each major phase transition with updated header phase label and
+  fork question states. Never more than once per phase.
+- **Updates answered items:** Dim ◇ → bold ◆ with inline answer: `◆ Tabs or sidebar? → "tabs"`
+- **Between re-emissions:** Standalone diamond breadcrumb lines mark phase progress:
+  `◆◆◆◇◇◇ Exploring · 3/8 priorities`. These form a scannable spine in scrollback.
 - **Consumed:** At each synthesis point, check for new responses and incorporate
-- **Disappears:** Naturally scrolls away. Never re-posted. Never referenced in handoff.
-  Do not mention unanswered questions — that's guilt, not guidance.
+- **Ends:** Final handoff line uses the figure bookend: `── ▐░▌ Edison ── Complete`
+- **Never:** References unanswered questions in handoff. Guilt, not guidance.
 
-Use ◇/◆ diamond markers and 💡 lightbulb prefix — this is Edison's visual identity,
-distinct from GSD's checkbox style. Do NOT use TodoWrite. The diamonds and lightbulb
-make it instantly recognizable as an Edison element, not a task list.
+**Fork question voice:**
+- One warm intro line: "A few forks in the road:" (2+) or "A fork in the road:" (1)
+- Terse questions below, no second person, no enthusiasm, no sycophancy
+- Leverage indicators instead of token estimates: `(high leverage)` / `(moderate leverage)`
+- Users don't think in tokens — leverage framing communicates value without false precision
+
+**Character set:** Use only ◇/◆ diamonds, box-drawing light (`┌│└├┤─`), block elements
+(`▐░▌`), and shade characters. NO emoji — they render inconsistently across terminals.
+This is Edison's visual identity, distinct from GSD's checkbox style. Do NOT use TodoWrite.
+
+**Full visual identity spec:** `.edison/explorations/2026-04-05-guidance-board-identity/synthesis/DEFINITIVE-SPEC.md`
 
 **If the user responds**, incorporate their answer at the next synthesis point.
 Narrow the research scope at synthesis time, not dispatch time. No work is wasted —
@@ -123,11 +147,11 @@ what's still ambiguous.
 
 **Constraints:**
 - Maximum 5 items on the board at any time (across all phases)
-- Post the board once. Never re-post, never nag.
+- Re-emit only at major phase transitions — never more than once per phase
 - Never block on any question
-- Only surface when token savings are dramatic (not for 5K-token forks)
+- Only surface when leverage is high (not for low-impact forks)
 - Do not ask questions that research could answer — those are Edison's job
-- Show estimated token savings per question (makes the value of answering visible)
+- Show leverage indicators per question (`high leverage` / `moderate leverage`) — not token estimates
 
 ### Step 2: Research Dispatch (1-5 agents in parallel)
 
@@ -220,11 +244,13 @@ Agent outputs go to `.edison/explorations/[date]-[feature]/r1/priority-N-name/`.
 
 **Guidance Board check:** Before synthesizing, check if the user responded to any
 items on the Guidance Board. If yes, weight R1 findings accordingly — the user's
-answer narrows which research is primary vs. background context. Mark answered items
-on the board (● with their answer). Update the progress line. Note the narrowing
-in synthesis so later rounds understand the constraint came from user input, not
-from research conclusions. If R1 surfaced a new high-leverage fork, append it to
-the board (up to 5 items total).
+answer narrows which research is primary vs. background context. Re-emit the board
+with updated header (`◆ Edison — Round 1`) and mark answered items as bold `◆` with
+inline answer: `◆ Tabs or sidebar? → "tabs"`. Between this re-emission and the next
+phase, emit standalone diamond breadcrumb lines (`◆◆◆◇◇◇ Exploring · 3/8 priorities`)
+to mark progress. Note the narrowing in synthesis so later rounds understand the
+constraint came from user input, not from research conclusions. If R1 surfaced a
+new high-leverage fork, append it to the board (up to 5 items total).
 
 After all R1 agents complete:
 - Per-priority: recommended path, confidence, unchallenged assumptions
