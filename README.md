@@ -23,6 +23,8 @@ FigJam helps you brainstorm. v0 helps you build. Nothing helps you **decide**.
 
 Edison fills the phase between brainstorming and building — the part where you research alternatives, weigh tradeoffs, and commit to an approach. It dispatches parallel research agents, runs progressively-deepening rounds of analysis, and produces a self-executing spec that binds to your implementation workflow.
 
+Edison's purpose is creative discovery, not convention compliance. It knows established patterns the way an artist knows art history — as context, not instructions. When Edison independently arrives at a known pattern, that's validation through understanding. When it doesn't, that's where the real value lives.
+
 ## Three Modes
 
 | Mode | Time | What It Does |
@@ -78,12 +80,18 @@ Or just describe a complex design decision — Edison self-triggers when it dete
   |   +-- Phase 0:   Project Scan (first run only)
   |   +-- Phase 1:   Vision Capture
   |   +-- Phase 2:   Research (1-5 agents scan the real world)
+  |   |   +-- Fork Questions (async — asks 1-3 high-leverage
+  |   |       pivots, keeps working regardless of answer)
   |   +-- Phase 3:   Priority Identification (5-10 key decisions)
   |   +-- Phase 4:   Round 1 - The Engineer (constraint satisfaction)
+  |   |   +-- Auto-graduation: confident priorities freeze early
+  |   |   +-- Round Signal Check: skip if no new signal
   |   +-- Phase 5:   Round 2 - The Designer (constraint challenging)
+  |   |   +-- Creative contribution map: novel vs established ground
   |   +-- Phase 6:   Round 3 - The Provocateur (constraint removal)
-  |   +-- Phase 7:   Final Synthesis + Review Gate
-  |   +-- Phase 8:   Handoff (bind spec to AGENTS.md)
+  |   +-- Phase 7:   Final Synthesis
+  |   +-- Phase 7.5: Review Gate (Adversary + New Hire stress-test)
+  |   +-- Phase 8:   Handoff (bind spec to AGENTS.md, auto-commit)
   |
   +-- Audit
       +-- Parse MUST/VERIFICATION fields from spec
@@ -109,11 +117,13 @@ Score 2+ recommends Explore.
 <details>
 <summary><strong>Progressive Deepening</strong></summary>
 
-- **Round 1 (The Engineer)** — Finds the sensible, research-informed path for each priority. Priorities that resolve here freeze — they don't advance.
-- **Round 2 (The Designer)** — Challenges Round 1's assumptions through analytical lenses (Archaeologist, Failure Analyst, End-User Materialist, Economist, Integrator). Only contested priorities advance.
+- **Round 1 (The Engineer)** — Finds the sensible, research-informed path for each priority. High-confidence priorities with no cross-priority conflicts auto-graduate — they freeze and don't advance, saving tokens. A Round Signal Check after R1 scores novelty and disagreement; if agents just confirmed what research already found, Edison recommends skipping to synthesis.
+- **Round 2 (The Designer)** — Challenges Round 1's assumptions through analytical lenses (Archaeologist, Failure Analyst, End-User Materialist, Economist, Integrator). Seeks synthesis between R1 options, not just elimination. Tracks a creative contribution map: which recommendations align with established conventions vs. genuinely novel territory.
 - **Round 3 (The Provocateur)** — Tackles tensions *between* priorities. Finds ideas nobody asked for that might be brilliant. Produces kernel extractions.
 
 Synthesis picks the best answer per-priority across all rounds. Round 1 might win for stability. Round 3 might win for the signature interaction.
+
+**Fork Questions:** Before dispatching research, Edison identifies 1-3 high-leverage pivot questions — places where one answer would eliminate 30%+ of the research scope. These are surfaced async (like an email from a colleague who keeps working regardless). If you answer, Edison narrows at synthesis time. If you don't, the exploration is identical to a fully autonomous run.
 </details>
 
 <details>
